@@ -1,0 +1,15 @@
+[submodule "ext/EmbGenParser"]
+	path = ext/EmbGenParser
+	url = https://github.com/xxAtrain223/EmbGenParser.git
+[submodule "ext/googletest"]
+	path = ext/googletest
+	url = https://github.com/google/googletest.git
+[submodule "ext/json"]
+	path = ext/json
+	url = https://github.com/nlohmann/json.git
+[submodule "ext/cpp-linenoise"]
+	path = ext/cpp-linenoise
+	url = https://github.com/yhirose/cpp-linenoise.git
+[submodule "ext/sol2"]
+	path = ext/sol2
+	url = https://github.com/ThePhD/sol2.git
