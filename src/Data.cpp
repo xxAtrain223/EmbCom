@@ -4,8 +4,37 @@ namespace emb
 {
     namespace com
     {
+        std::string TypeToString(const Data::Type type)
+        {
+            switch (type)
+            {
+            case Data::Type::Bool:
+                return "Bool";
+            case Data::Type::Float:
+                return "Float";
+            case Data::Type::Uint8:
+                return "Uint8";
+            case Data::Type::Uint16:
+                return "Uint16";
+            case Data::Type::Uint32:
+                return "Uint32";
+            case Data::Type::Uint64:
+                return "Uint64";
+            case Data::Type::Int8:
+                return "Int8";
+            case Data::Type::Int16:
+                return "Int16";
+            case Data::Type::Int32:
+                return "Int32";
+            case Data::Type::Int64:
+                return "Int64";
+            default:
+                return "";
+            }
+        }
+
         Data::BadCast::BadCast(std::string message) :
-            std::runtime_error(message)
+            std::runtime_error("BadCast: " + message)
         {
         }
 
@@ -23,7 +52,7 @@ namespace emb
             }
             else
             {
-                throw BadCast();
+                throw BadCast("Tried to set " + TypeToString(m_type) + " with Bool.");
             }
         }
 
@@ -35,7 +64,7 @@ namespace emb
             }
             else
             {
-                throw BadCast();
+                throw BadCast("Tried to set " + TypeToString(m_type) + " with Float.");
             }
         }
 
@@ -50,7 +79,7 @@ namespace emb
             }
             else
             {
-                throw BadCast();
+                throw BadCast("Tried to set " + TypeToString(m_type) + " with Uint8.");
             }
         }
 
@@ -64,7 +93,7 @@ namespace emb
             }
             else
             {
-                throw BadCast();
+                throw BadCast("Tried to set " + TypeToString(m_type) + " with Uint16.");
             }
         }
 
@@ -77,7 +106,7 @@ namespace emb
             }
             else
             {
-                throw BadCast();
+                throw BadCast("Tried to set " + TypeToString(m_type) + " with Uint32.");
             }
         }
 
@@ -89,7 +118,7 @@ namespace emb
             }
             else
             {
-                throw BadCast();
+                throw BadCast("Tried to set " + TypeToString(m_type) + " with Uint64.");
             }
         }
 
@@ -104,7 +133,7 @@ namespace emb
             }
             else
             {
-                throw BadCast();
+                throw BadCast("Tried to set " + TypeToString(m_type) + " with Int8.");
             }
         }
 
@@ -118,7 +147,7 @@ namespace emb
             }
             else
             {
-                throw BadCast();
+                throw BadCast("Tried to set " + TypeToString(m_type) + " with Int16.");
             }
         }
 
@@ -131,7 +160,7 @@ namespace emb
             }
             else
             {
-                throw BadCast();
+                throw BadCast("Tried to set " + TypeToString(m_type) + " with Int32.");
             }
         }
 
@@ -143,7 +172,7 @@ namespace emb
             }
             else
             {
-                throw BadCast();
+                throw BadCast("Tried to set " + TypeToString(m_type) + " with Int64.");
             }
         }
 
@@ -155,7 +184,7 @@ namespace emb
             }
             else
             {
-                throw BadCast();
+                throw BadCast("Tried to get " + TypeToString(m_type) + " with Bool.");
             }
         }
 
@@ -167,7 +196,7 @@ namespace emb
             }
             else
             {
-                throw BadCast();
+                throw BadCast("Tried to get " + TypeToString(m_type) + " with Float.");
             }
         }
 
@@ -179,7 +208,7 @@ namespace emb
             }
             else
             {
-                throw BadCast();
+                throw BadCast("Tried to get " + TypeToString(m_type) + " with Uint8.");
             }
         }
 
@@ -195,7 +224,7 @@ namespace emb
             }
             else
             {
-                throw BadCast();
+                throw BadCast("Tried to get " + TypeToString(m_type) + " with Uint16.");
             }
         }
 
@@ -215,7 +244,7 @@ namespace emb
             }
             else
             {
-                throw BadCast();
+                throw BadCast("Tried to get " + TypeToString(m_type) + " with Uint32.");
             }
         }
 
@@ -239,7 +268,7 @@ namespace emb
             }
             else
             {
-                throw BadCast();
+                throw BadCast("Tried to get " + TypeToString(m_type) + " with Uint64.");
             }
         }
 
@@ -251,7 +280,7 @@ namespace emb
             }
             else
             {
-                throw BadCast();
+                throw BadCast("Tried to get " + TypeToString(m_type) + " with Int8.");
             }
         }
 
@@ -267,7 +296,7 @@ namespace emb
             }
             else
             {
-                throw BadCast();
+                throw BadCast("Tried to get " + TypeToString(m_type) + " with Int16.");
             }
         }
 
@@ -287,7 +316,7 @@ namespace emb
             }
             else
             {
-                throw BadCast();
+                throw BadCast("Tried to get " + TypeToString(m_type) + " with Int32.");
             }
         }
 
@@ -311,7 +340,7 @@ namespace emb
             }
             else
             {
-                throw BadCast();
+                throw BadCast("Tried to get " + TypeToString(m_type) + " with Int64.");
             }
         }
 

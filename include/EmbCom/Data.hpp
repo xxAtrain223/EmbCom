@@ -98,25 +98,25 @@ namespace emb
                 {
                     return getUint64();
                 }
-                else if constexpr(std::is_same_v<T, uint8_t>)
+                else if constexpr(std::is_same_v<T, int8_t>)
                 {
-                    return getUint8();
+                    return getInt8();
                 }
-                else if constexpr(std::is_same_v<T, uint16_t>)
+                else if constexpr(std::is_same_v<T, int16_t>)
                 {
-                    return getUint16();
+                    return getInt16();
                 }
-                else if constexpr(std::is_same_v<T, uint32_t>)
+                else if constexpr(std::is_same_v<T, int32_t>)
                 {
-                    return getUint32();
+                    return getInt32();
                 }
-                else if constexpr(std::is_same_v<T, uint64_t>)
+                else if constexpr(std::is_same_v<T, int64_t>)
                 {
-                    return getUint64();
+                    return getInt64();
                 }
                 else
                 {
-                    throw BadCast();
+                    throw BadCast("Tried to get " + TypeToString(m_type) + " with T.");
                 }
             }
 
