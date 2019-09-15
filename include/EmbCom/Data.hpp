@@ -116,7 +116,7 @@ namespace emb
                 }
                 else
                 {
-                    throw BadCast("Tried to get " + TypeToString(m_type) + " with T.");
+                    throw BadCast("Tried to get " + TypeToString() + " with T.");
                 }
             }
 
@@ -138,7 +138,7 @@ namespace emb
             int32_t getInt32() const;
             int64_t getInt64() const;
 
-            std::string TypeToString(const Data::Type type);
+            std::string TypeToString() const;
         };
     }
 }
