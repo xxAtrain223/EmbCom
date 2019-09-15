@@ -4,7 +4,7 @@ namespace emb
 {
     namespace com
     {
-        std::string TypeToString(const Data::Type type)
+        std::string Data::TypeToString(const Data::Type type)
         {
             switch (type)
             {
