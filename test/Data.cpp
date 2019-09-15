@@ -21,6 +21,16 @@ namespace emb
                 value = data;
                 EXPECT_EQ(value, true);
 
+                EXPECT_THROW(data.set<float>(0.f), Data::BadCast);
+                EXPECT_THROW(data.set<uint8_t>(0), Data::BadCast);
+                EXPECT_THROW(data.set<uint16_t>(0), Data::BadCast);
+                EXPECT_THROW(data.set<uint32_t>(0), Data::BadCast);
+                EXPECT_THROW(data.set<uint64_t>(0), Data::BadCast);
+                EXPECT_THROW(data.set<int8_t>(0), Data::BadCast);
+                EXPECT_THROW(data.set<int16_t>(0), Data::BadCast);
+                EXPECT_THROW(data.set<int32_t>(0), Data::BadCast);
+                EXPECT_THROW(data.set<int64_t>(0), Data::BadCast);
+
                 EXPECT_THROW(data.get<float>(), Data::BadCast);
                 EXPECT_THROW(data.get<uint8_t>(), Data::BadCast);
                 EXPECT_THROW(data.get<uint16_t>(), Data::BadCast);
@@ -44,6 +54,16 @@ namespace emb
                 data = 3.14f;
                 value = data;
                 EXPECT_FLOAT_EQ(value, 3.14f);
+
+                EXPECT_THROW(data.set<bool>(0.f), Data::BadCast);
+                EXPECT_THROW(data.set<uint8_t>(0), Data::BadCast);
+                EXPECT_THROW(data.set<uint16_t>(0), Data::BadCast);
+                EXPECT_THROW(data.set<uint32_t>(0), Data::BadCast);
+                EXPECT_THROW(data.set<uint64_t>(0), Data::BadCast);
+                EXPECT_THROW(data.set<int8_t>(0), Data::BadCast);
+                EXPECT_THROW(data.set<int16_t>(0), Data::BadCast);
+                EXPECT_THROW(data.set<int32_t>(0), Data::BadCast);
+                EXPECT_THROW(data.set<int64_t>(0), Data::BadCast);
 
                 EXPECT_THROW(data.get<bool>(), Data::BadCast);
                 EXPECT_THROW(data.get<uint8_t>(), Data::BadCast);
@@ -69,6 +89,16 @@ namespace emb
                 value = data;
                 EXPECT_EQ(value, 127u);
 
+                EXPECT_THROW(data.set<bool>(false), Data::BadCast);
+                EXPECT_THROW(data.set<float>(0.f), Data::BadCast);
+                EXPECT_THROW(data.set<uint16_t>(0), Data::BadCast);
+                EXPECT_THROW(data.set<uint32_t>(0), Data::BadCast);
+                EXPECT_THROW(data.set<uint64_t>(0), Data::BadCast);
+                EXPECT_THROW(data.set<int8_t>(0), Data::BadCast);
+                EXPECT_THROW(data.set<int16_t>(0), Data::BadCast);
+                EXPECT_THROW(data.set<int32_t>(0), Data::BadCast);
+                EXPECT_THROW(data.set<int64_t>(0), Data::BadCast);
+
                 EXPECT_THROW(data.get<bool>(), Data::BadCast);
                 EXPECT_THROW(data.get<float>(), Data::BadCast);
                 EXPECT_NO_THROW(data.get<uint16_t>());
@@ -92,6 +122,16 @@ namespace emb
                 data = static_cast<uint16_t>(32767u);
                 value = data;
                 EXPECT_EQ(value, 32767u);
+
+                EXPECT_THROW(data.set<bool>(false), Data::BadCast);
+                EXPECT_THROW(data.set<float>(0.f), Data::BadCast);
+                EXPECT_NO_THROW(data.set<uint8_t>(0));
+                EXPECT_THROW(data.set<uint32_t>(0), Data::BadCast);
+                EXPECT_THROW(data.set<uint64_t>(0), Data::BadCast);
+                EXPECT_THROW(data.set<int8_t>(0), Data::BadCast);
+                EXPECT_THROW(data.set<int16_t>(0), Data::BadCast);
+                EXPECT_THROW(data.set<int32_t>(0), Data::BadCast);
+                EXPECT_THROW(data.set<int64_t>(0), Data::BadCast);
 
                 EXPECT_THROW(data.get<bool>(), Data::BadCast);
                 EXPECT_THROW(data.get<float>(), Data::BadCast);
@@ -117,6 +157,16 @@ namespace emb
                 value = data;
                 EXPECT_EQ(value, 2147483647u);
 
+                EXPECT_THROW(data.set<bool>(false), Data::BadCast);
+                EXPECT_THROW(data.set<float>(0.f), Data::BadCast);
+                EXPECT_NO_THROW(data.set<uint8_t>(0));
+                EXPECT_NO_THROW(data.set<uint16_t>(0));
+                EXPECT_THROW(data.set<uint64_t>(0), Data::BadCast);
+                EXPECT_THROW(data.set<int8_t>(0), Data::BadCast);
+                EXPECT_THROW(data.set<int16_t>(0), Data::BadCast);
+                EXPECT_THROW(data.set<int32_t>(0), Data::BadCast);
+                EXPECT_THROW(data.set<int64_t>(0), Data::BadCast);
+
                 EXPECT_THROW(data.get<bool>(), Data::BadCast);
                 EXPECT_THROW(data.get<float>(), Data::BadCast);
                 EXPECT_THROW(data.get<uint8_t>(), Data::BadCast);
@@ -140,6 +190,16 @@ namespace emb
                 data = static_cast<uint64_t>(4611686018427387903u);
                 value = data;
                 EXPECT_EQ(value, 4611686018427387903u);
+
+                EXPECT_THROW(data.set<bool>(false), Data::BadCast);
+                EXPECT_THROW(data.set<float>(0.f), Data::BadCast);
+                EXPECT_NO_THROW(data.set<uint8_t>(0));
+                EXPECT_NO_THROW(data.set<uint16_t>(0));
+                EXPECT_NO_THROW(data.set<uint32_t>(0));
+                EXPECT_THROW(data.set<int8_t>(0), Data::BadCast);
+                EXPECT_THROW(data.set<int16_t>(0), Data::BadCast);
+                EXPECT_THROW(data.set<int32_t>(0), Data::BadCast);
+                EXPECT_THROW(data.set<int64_t>(0), Data::BadCast);
 
                 EXPECT_THROW(data.get<bool>(), Data::BadCast);
                 EXPECT_THROW(data.get<float>(), Data::BadCast);
@@ -165,6 +225,16 @@ namespace emb
                 value = data;
                 EXPECT_EQ(value, -127);
 
+                EXPECT_THROW(data.set<bool>(false), Data::BadCast);
+                EXPECT_THROW(data.set<float>(0.f), Data::BadCast);
+                EXPECT_THROW(data.set<uint8_t>(0), Data::BadCast);
+                EXPECT_THROW(data.set<uint16_t>(0), Data::BadCast);
+                EXPECT_THROW(data.set<uint32_t>(0), Data::BadCast);
+                EXPECT_THROW(data.set<uint64_t>(0), Data::BadCast);
+                EXPECT_THROW(data.set<int16_t>(0), Data::BadCast);
+                EXPECT_THROW(data.set<int32_t>(0), Data::BadCast);
+                EXPECT_THROW(data.set<int64_t>(0), Data::BadCast);
+
                 EXPECT_THROW(data.get<bool>(), Data::BadCast);
                 EXPECT_THROW(data.get<float>(), Data::BadCast);
                 EXPECT_THROW(data.get<uint8_t>(), Data::BadCast);
@@ -188,6 +258,16 @@ namespace emb
                 data = static_cast<int16_t>(-32768);
                 value = data;
                 EXPECT_EQ(value, -32768);
+
+                EXPECT_THROW(data.set<bool>(false), Data::BadCast);
+                EXPECT_THROW(data.set<float>(0.f), Data::BadCast);
+                EXPECT_THROW(data.set<uint8_t>(0), Data::BadCast);
+                EXPECT_THROW(data.set<uint16_t>(0), Data::BadCast);
+                EXPECT_THROW(data.set<uint32_t>(0), Data::BadCast);
+                EXPECT_THROW(data.set<uint64_t>(0), Data::BadCast);
+                EXPECT_NO_THROW(data.set<int8_t>(0));
+                EXPECT_THROW(data.set<int32_t>(0), Data::BadCast);
+                EXPECT_THROW(data.set<int64_t>(0), Data::BadCast);
 
                 EXPECT_THROW(data.get<bool>(), Data::BadCast);
                 EXPECT_THROW(data.get<float>(), Data::BadCast);
@@ -213,6 +293,16 @@ namespace emb
                 value = data;
                 EXPECT_EQ(value, -2147483648);
 
+                EXPECT_THROW(data.set<bool>(false), Data::BadCast);
+                EXPECT_THROW(data.set<float>(0.f), Data::BadCast);
+                EXPECT_THROW(data.set<uint8_t>(0), Data::BadCast);
+                EXPECT_THROW(data.set<uint16_t>(0), Data::BadCast);
+                EXPECT_THROW(data.set<uint32_t>(0), Data::BadCast);
+                EXPECT_THROW(data.set<uint64_t>(0), Data::BadCast);
+                EXPECT_NO_THROW(data.set<int8_t>(0));
+                EXPECT_NO_THROW(data.set<int16_t>(0));
+                EXPECT_THROW(data.set<int64_t>(0), Data::BadCast);
+
                 EXPECT_THROW(data.get<bool>(), Data::BadCast);
                 EXPECT_THROW(data.get<float>(), Data::BadCast);
                 EXPECT_THROW(data.get<uint8_t>(), Data::BadCast);
@@ -237,6 +327,16 @@ namespace emb
                 value = data;
                 EXPECT_EQ(value, -4611686018427387904);
 
+                EXPECT_THROW(data.set<bool>(false), Data::BadCast);
+                EXPECT_THROW(data.set<float>(0.f), Data::BadCast);
+                EXPECT_THROW(data.set<uint8_t>(0), Data::BadCast);
+                EXPECT_THROW(data.set<uint16_t>(0), Data::BadCast);
+                EXPECT_THROW(data.set<uint32_t>(0), Data::BadCast);
+                EXPECT_THROW(data.set<uint64_t>(0), Data::BadCast);
+                EXPECT_NO_THROW(data.set<int8_t>(0));
+                EXPECT_NO_THROW(data.set<int16_t>(0));
+                EXPECT_NO_THROW(data.set<int32_t>(0));
+
                 EXPECT_THROW(data.get<bool>(), Data::BadCast);
                 EXPECT_THROW(data.get<float>(), Data::BadCast);
                 EXPECT_THROW(data.get<uint8_t>(), Data::BadCast);
@@ -246,6 +346,14 @@ namespace emb
                 EXPECT_THROW(data.get<int8_t>(), Data::BadCast);
                 EXPECT_THROW(data.get<int16_t>(), Data::BadCast);
                 EXPECT_THROW(data.get<int32_t>(), Data::BadCast);
+            }
+
+            TEST(embcom_Data, BadType)
+            {
+                Data data(Data::Type::Bool);
+                
+                EXPECT_THROW(data.set<double>(0.0), Data::BadCast);
+                EXPECT_THROW(data.get<double>(), Data::BadCast);
             }
         }
     }

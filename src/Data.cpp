@@ -44,7 +44,7 @@ namespace emb
             m_value.m_uint64 = 0;
         }
 
-        void Data::set(const bool& v)
+        void Data::setBool(const bool& v)
         {
             if (m_type == Type::Bool)
             {
@@ -56,7 +56,7 @@ namespace emb
             }
         }
 
-        void Data::set(const float& v)
+        void Data::setFloat(const float& v)
         {
             if (m_type == Type::Float)
             {
@@ -68,7 +68,7 @@ namespace emb
             }
         }
 
-        void Data::set(const uint8_t& v)
+        void Data::setUint8(const uint8_t& v)
         {
             if (m_type == Type::Uint8 ||
                 m_type == Type::Uint16 ||
@@ -83,7 +83,7 @@ namespace emb
             }
         }
 
-        void Data::set(const uint16_t& v)
+        void Data::setUint16(const uint16_t& v)
         {
             if (m_type == Type::Uint16 ||
                 m_type == Type::Uint32 ||
@@ -97,7 +97,7 @@ namespace emb
             }
         }
 
-        void Data::set(const uint32_t& v)
+        void Data::setUint32(const uint32_t& v)
         {
             if (m_type == Type::Uint32 ||
                 m_type == Type::Uint64)
@@ -110,7 +110,7 @@ namespace emb
             }
         }
 
-        void Data::set(const uint64_t& v)
+        void Data::setUint64(const uint64_t& v)
         {
             if (m_type == Type::Uint64)
             {
@@ -122,7 +122,7 @@ namespace emb
             }
         }
 
-        void Data::set(const int8_t& v)
+        void Data::setInt8(const int8_t& v)
         {
             if (m_type == Type::Int8 ||
                 m_type == Type::Int16 ||
@@ -137,7 +137,7 @@ namespace emb
             }
         }
 
-        void Data::set(const int16_t& v)
+        void Data::setInt16(const int16_t& v)
         {
             if (m_type == Type::Int16 ||
                 m_type == Type::Int32 ||
@@ -151,7 +151,7 @@ namespace emb
             }
         }
 
-        void Data::set(const int32_t& v)
+        void Data::setInt32(const int32_t& v)
         {
             if (m_type == Type::Int32 ||
                 m_type == Type::Int64)
@@ -164,7 +164,7 @@ namespace emb
             }
         }
 
-        void Data::set(const int64_t& v)
+        void Data::setInt64(const int64_t& v)
         {
             if (m_type == Type::Int64)
             {

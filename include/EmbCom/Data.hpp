@@ -54,16 +54,54 @@ namespace emb
                 set(v);
             }
 
-            void set(const bool& v);
-            void set(const float& v);
-            void set(const uint8_t& v);
-            void set(const uint16_t& v);
-            void set(const uint32_t& v);
-            void set(const uint64_t& v);
-            void set(const int8_t& v);
-            void set(const int16_t& v);
-            void set(const int32_t& v);
-            void set(const int64_t& v);
+            template <typename T>
+            void set(const T& v)
+            {
+                if constexpr (std::is_same_v<T, bool>)
+                {
+                    setBool(v);
+                }
+                else if constexpr (std::is_same_v<T, float>)
+                {
+                    setFloat(v);
+                }
+                else if constexpr (std::is_same_v<T, uint8_t>)
+                {
+                    setUint8(v);
+                }
+                else if constexpr (std::is_same_v<T, uint16_t>)
+                {
+                    setUint16(v);
+                }
+                else if constexpr (std::is_same_v<T, uint32_t>)
+                {
+                    setUint32(v);
+                }
+                else if constexpr (std::is_same_v<T, uint64_t>)
+                {
+                    setUint64(v);
+                }
+                else if constexpr (std::is_same_v<T, int8_t>)
+                {
+                    setInt8(v);
+                }
+                else if constexpr (std::is_same_v<T, int16_t>)
+                {
+                    setInt16(v);
+                }
+                else if constexpr (std::is_same_v<T, int32_t>)
+                {
+                    setInt32(v);
+                }
+                else if constexpr (std::is_same_v<T, int64_t>)
+                {
+                    setInt64(v);
+                }
+                else
+                {
+                    throw BadCast("Tried to set " + TypeToString() + " with " + typeid(T).name() + ".");
+                }
+            }
 
             template <typename T>
             operator T() const
@@ -116,7 +154,7 @@ namespace emb
                 }
                 else
                 {
-                    throw BadCast("Tried to get " + TypeToString() + " with T.");
+                    throw BadCast("Tried to get " + TypeToString() + " with " + typeid(T).name() + ".");
                 }
             }
 
@@ -126,6 +164,17 @@ namespace emb
         protected:
             Type m_type;
             Value m_value;
+
+            void setBool(const bool& v);
+            void setFloat(const float& v);
+            void setUint8(const uint8_t& v);
+            void setUint16(const uint16_t& v);
+            void setUint32(const uint32_t& v);
+            void setUint64(const uint64_t& v);
+            void setInt8(const int8_t& v);
+            void setInt16(const int16_t& v);
+            void setInt32(const int32_t& v);
+            void setInt64(const int64_t& v);
 
             bool getBool() const;
             float getFloat() const;
