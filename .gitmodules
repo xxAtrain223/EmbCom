@@ -13,3 +13,9 @@
 [submodule "ext/sol2"]
 	path = ext/sol2
 	url = https://github.com/ThePhD/sol2.git
+[submodule "ext/EmbMessenger"]
+	path = ext/EmbMessenger
+	url = https://github.com/xxAtrain223/EmbMessenger.git
+[submodule "ext/args"]
+	path = ext/args
+	url = https://github.com/Taywee/args.git
