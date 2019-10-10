@@ -62,8 +62,8 @@ namespace emb::com
             throw std::exception();
     }
 
-    Data::Data(Type m_type) :
-        m_type(m_type)
+    Data::Data(Type type) :
+        m_type(type)
     {
         m_value.m_uint64 = 0;
     }

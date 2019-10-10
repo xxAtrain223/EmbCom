@@ -46,7 +46,14 @@ namespace emb::com
             BadCast(std::string message = "");
         };
 
-        Data(Type m_type);
+        Data(Type type);
+
+        template <typename T>
+        Data(Type type, T value) :
+            m_type(type)
+        {
+            set(value);
+        }
 
         template <typename T>
         void operator=(const T& v)

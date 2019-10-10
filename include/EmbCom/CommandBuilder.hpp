@@ -12,6 +12,7 @@
 
 #include "EmbCom/Data.hpp"
 #include "EmbCom/Command.hpp"
+#include "EmbCom/Exceptions.hpp"
 
 namespace emb::com
 {
@@ -21,8 +22,8 @@ namespace emb::com
         uint16_t m_commandIndex;
         std::shared_ptr<host::EmbMessenger> m_messenger;
 
-        std::vector<Data::Type> m_parameterVector;
-        std::vector<std::tuple<std::string, Data::Type>> m_returnValueVector;
+        std::vector<Data::Type> m_parameterTypes;
+        std::vector<std::tuple<std::string, Data::Type>> m_returnValueTypes;
 
     public:
         CommandBuilder(
@@ -33,20 +34,17 @@ namespace emb::com
         );
 
         template <typename ...Ts>
-        std::shared_ptr<Command> makeCommand(Ts... parameters) const
+        std::shared_ptr<Command> makeCommand(Ts&&... parameters) const
         {
-            std::vector<Data::Type> reversedParameters = m_parameterVector;
-            std::reverse(reversedParameters.begin(), reversedParameters.end());
-            std::vector<Data> parameterVector = makeParameters(reversedParameters, std::forward<Ts>(parameters)...);
-            std::reverse(parameterVector.begin(), parameterVector.end());
+            std::vector<Data> parameterVector = makeParameters(m_parameterTypes, std::forward<Ts>(parameters)...);
             
-            std::shared_ptr<Command> command = std::make_shared<Command>(m_appendageIndex, parameterVector, m_returnValueVector);
-
-            return command;
+            return std::make_shared<Command>(m_appendageIndex, parameterVector, m_returnValueTypes);
         }
 
+        std::shared_ptr<Command> makeCommand(const std::vector<Data::Value>& parameters) const;
+
         template <typename ...Ts>
-        std::shared_ptr<Command> operator()(Ts... parameters) const
+        std::shared_ptr<Command> operator()(Ts&&... parameters) const
         {
             std::shared_ptr<Command> command = makeCommand(std::forward<Ts>(parameters)...);
 
@@ -54,35 +52,32 @@ namespace emb::com
 
             return command;
         }
+
+        std::shared_ptr<Command> operator()(const std::vector<Data::Value>& parameters) const;
         
     private:
-        inline std::vector<Data> makeParameters(std::vector<Data::Type> types) const
+        template <typename ...Ts, std::size_t ...Is>
+        std::vector<Data> pushParameters(std::index_sequence<Is...>, Ts&& ... values) const
         {
-            if (!types.empty())
-            {
-                throw std::exception("Not enough c++ parameters");
-            }
-            return std::vector<Data>();
+            std::vector<Data> data;
+            data.reserve(sizeof...(values));
+
+            // Fold Expression: https://en.cppreference.com/w/cpp/language/fold
+            // Comma Operator:  https://en.cppreference.com/w/cpp/language/operator_other
+            (data.emplace_back(m_parameterTypes[Is], std::forward<Ts>(values)), ...);
+
+            return data;
         }
 
-        template <typename T, typename ...Ts>
-        std::vector<Data> makeParameters(std::vector<Data::Type> types, T param, Ts... parameters) const
+        template <typename ...Ts>
+        std::vector<Data> makeParameters(Ts&& ... parameterValues) const
         {
-            if (types.empty())
+            if (sizeof...(parameterValues) != m_parameterTypes.size())
             {
-                throw std::exception("Too many c++ parameters");
+                throw ParameterException("Value count is not the same as the Type count");
             }
 
-            Data::Type type = types.back();
-            types.pop_back();
-
-            Data data(type);
-            data = param;
-
-            std::vector<Data> dataVector = makeParameters(types, std::forward<Ts>(parameters)...);
-            dataVector.emplace_back(data);
-
-            return dataVector;
+            return pushParameters(std::make_index_sequence<sizeof...(parameterValues)>{}, std::forward<Ts>(parameterValues)...);
         }
     };
 }

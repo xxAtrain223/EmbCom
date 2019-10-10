@@ -26,6 +26,7 @@ namespace emb::com
 
     NEW_EMB_EX(FileException);
     NEW_EMB_EX(XmlParseException);
+    NEW_EMB_EX(ParameterException);
 }
 
 #endif // EMBCOM_PARSER_EXCEPTIONS_HPP

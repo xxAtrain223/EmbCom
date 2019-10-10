@@ -35,7 +35,6 @@ namespace emb::com
         std::ifstream coreConfigStream(coreConfigFilePath.string());
         nlohmann::json coreConfig = nlohmann::json::parse(coreConfigStream);
 
-        //std::unordered_map<std::string, std::unordered_map<std::string, uint16_t>> commandIds;
         for (auto& appendageType : coreConfig["appendages"].items())
         {
             fs::path appendageFilePath = appendagesFolder / (appendageType.key() + ".xml");
