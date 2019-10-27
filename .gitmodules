@@ -19,3 +19,9 @@
 [submodule "ext/args"]
 	path = ext/args
 	url = https://github.com/Taywee/args.git
+[submodule "ext/serial"]
+	path = ext/serial
+	url = https://github.com/xxAtrain223/serial.git
+[submodule "ext/sini"]
+	path = ext/sini
+	url = https://github.com/xxAtrain223/sini.git
