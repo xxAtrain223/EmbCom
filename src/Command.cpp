@@ -13,47 +13,47 @@ namespace emb::com
         }
     }
 
-    void writeData(host::EmbMessenger* messenger, std::shared_ptr<Data> data)
+    void writeData(host::EmbMessenger* messenger, Data data)
     {
-        switch (data->getType())
+        switch (data.getType())
         {
         case Data::Type::Bool: {
-            messenger->write(static_cast<bool>(*data));
-        }
+            messenger->write(static_cast<bool>(data));
+        } break;
         case Data::Type::Float: {
-            messenger->write(static_cast<float>(*data));
-        }
+            messenger->write(static_cast<float>(data));
+        } break;
         case Data::Type::Uint8: {
-            messenger->write(static_cast<uint8_t>(*data));
-        }
+            messenger->write(static_cast<uint8_t>(data));
+        } break;
         case Data::Type::Uint16: {
-            messenger->write(static_cast<uint16_t>(*data));
-        }
+            messenger->write(static_cast<uint16_t>(data));
+        } break;
         case Data::Type::Uint32: {
-            messenger->write(static_cast<uint32_t>(*data));
-        }
+            messenger->write(static_cast<uint32_t>(data));
+        } break;
         case Data::Type::Uint64: {
-            messenger->write(static_cast<uint64_t>(*data));
-        }
+            messenger->write(static_cast<uint64_t>(data));
+        } break;
         case Data::Type::Int8: {
-            messenger->write(static_cast<int8_t>(*data));
-        }
+            messenger->write(static_cast<int8_t>(data));
+        } break;
         case Data::Type::Int16: {
-            messenger->write(static_cast<int16_t>(*data));
-        }
+            messenger->write(static_cast<int16_t>(data));
+        } break;
         case Data::Type::Int32: {
-            messenger->write(static_cast<int32_t>(*data));
-        }
+            messenger->write(static_cast<int32_t>(data));
+        } break;
         case Data::Type::Int64: {
-            messenger->write(static_cast<int64_t>(*data));
-        }
+            messenger->write(static_cast<int64_t>(data));
+        } break;
         }
     }
 
     void Command::send(host::EmbMessenger* messenger)
     {
         messenger->write(m_appendageIndex);
-        for (std::shared_ptr<Data> parameter : m_parameters)
+        for (Data parameter : m_parameters)
         {
             writeData(messenger, parameter);
         }
@@ -67,52 +67,52 @@ namespace emb::com
             bool value;
             messenger->read(value);
             *data = value;
-        }
+        } break;
         case Data::Type::Float: {
             float value;
             messenger->read(value);
             *data = value;
-        }
+        } break;
         case Data::Type::Uint8: {
             uint8_t value;
             messenger->read(value);
             *data = value;
-        }
+        } break;
         case Data::Type::Uint16: {
             uint16_t value;
             messenger->read(value);
             *data = value;
-        }
+        } break;
         case Data::Type::Uint32: {
             uint32_t value;
             messenger->read(value);
             *data = value;
-        }
+        } break;
         case Data::Type::Uint64: {
             uint64_t value;
             messenger->read(value);
             *data = value;
-        }
+        } break;
         case Data::Type::Int8: {
             int8_t value;
             messenger->read(value);
             *data = value;
-        }
+        } break;
         case Data::Type::Int16: {
             int16_t value;
             messenger->read(value);
             *data = value;
-        }
+        } break;
         case Data::Type::Int32: {
             int32_t value;
             messenger->read(value);
             *data = value;
-        }
+        } break;
         case Data::Type::Int64: {
             int64_t value;
             messenger->read(value);
             *data = value;
-        }
+        } break;
         }
     }
 

@@ -15,7 +15,7 @@ list(REMOVE_ITEM ${PROJECT_NAME}_SOURCES "${CMAKE_CURRENT_SOURCE_DIR}/src/Main.c
 add_library(${PROJECT_NAME} ${${PROJECT_NAME}_SOURCES} ${${PROJECT_NAME}_HEADERS})
 set_target_properties(${PROJECT_NAME} PROPERTIES CXX_STANDARD 17 CXX_STANDARD_REQUIRED YES)
 target_include_directories(${PROJECT_NAME} PUBLIC include)
-target_link_libraries(${PROJECT_NAME} EmbGenParser EmbMessengerHost nlohmann_json sol2)
+target_link_libraries(${PROJECT_NAME} EmbGenParser EmbMessengerHost nlohmann_json sol2 sini serial)
 
 if ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU")
     target_link_libraries(${PROJECT_NAME} stdc++fs)

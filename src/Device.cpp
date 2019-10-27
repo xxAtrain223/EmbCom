@@ -4,12 +4,18 @@
 
 #include "EmbGen/Parser/Appendage.hpp"
 
+#include "EmbMessenger/DebugBuffer.hpp"
+
+#include "EmbCom/SerialBuffer.hpp"
+
 #include <fstream>
 #include <tinyxml2.h>
 
 #include <nlohmann/json.hpp>
 
-namespace fs = std::experimental::filesystem;
+#include <sini.hpp>
+
+namespace fs = std::filesystem;
 
 namespace emb::com
 {
@@ -32,8 +38,27 @@ namespace emb::com
             throw FileException("The device 'appendages' directory does not exist or is not a folder.");
         }
 
+        fs::path platformIoFilePath = configFolder / "platformio.ini";
+        if (!fs::is_regular_file(platformIoFilePath))
+        {
+            throw FileException("The device 'platformio.ini' file does not exist or is not a file.");
+        }
+
         std::ifstream coreConfigStream(coreConfigFilePath.string());
         nlohmann::json coreConfig = nlohmann::json::parse(coreConfigStream);
+
+        std::ifstream platformIoStream(platformIoFilePath.string());
+        std::string platformIoString(
+            (std::istreambuf_iterator<char>(platformIoStream)),
+            std::istreambuf_iterator<char>());
+        
+        sini::Sini platformIo;
+        platformIo.parse(platformIoString);
+        std::string env_default = platformIo["platformio"]["env_default"];
+        std::string upload_port = platformIo["env:" + env_default]["upload_port"];
+
+        m_buffer = std::make_unique<SerialBuffer<64>>(upload_port);
+        m_messenger = std::make_shared<emb::host::EmbMessenger>(m_buffer.get(), [](std::exception_ptr) { return false; });
 
         for (auto& appendageType : coreConfig["appendages"].items())
         {
@@ -52,7 +77,7 @@ namespace emb::com
 
             for (auto& command : parserAppendage->getCommands())
             {
-                appendageCommandIds.emplace(command.first, coreConfig["commands"][appendageType.key() + "_" + command.first]);
+                appendageCommandIds.emplace(command.first, coreConfig["commands"][appendageType.key() + "_" + command.first + "_adaptor"]);
             }
 
             for (auto& appendageJson : appendageType.value().items())

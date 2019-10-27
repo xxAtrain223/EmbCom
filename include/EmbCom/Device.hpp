@@ -4,7 +4,7 @@
 #include <string>
 #include <memory>
 #include <map>
-#include <experimental/filesystem>
+#include <filesystem>
 
 #include <EmbMessenger/IBuffer.hpp>
 #include <EmbMessenger/EmbMessenger.hpp>
@@ -20,7 +20,7 @@ namespace emb::com
         std::map<std::string, Appendage> m_appendages;
 
     public:
-        Device(std::experimental::filesystem::path configFolder);
+        Device(std::filesystem::path configFolder);
 
         const Appendage& operator[](std::string appendageName) const;
 

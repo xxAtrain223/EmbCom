@@ -36,7 +36,7 @@ namespace emb::com
         template <typename ...Ts>
         std::shared_ptr<Command> makeCommand(Ts&&... parameters) const
         {
-            std::vector<Data> parameterVector = makeParameters(m_parameterTypes, std::forward<Ts>(parameters)...);
+            std::vector<Data> parameterVector = makeParameters(std::forward<Ts>(parameters)...);
             
             return std::make_shared<Command>(m_appendageIndex, parameterVector, m_returnValueTypes);
         }

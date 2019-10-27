@@ -6,7 +6,7 @@ namespace emb::com
         std::shared_ptr<host::EmbMessenger> messenger,
         std::shared_ptr<gen::parser::Command> genCommand,
         uint16_t commandIndex, uint16_t appendageIndex) :
-        m_messenger(m_messenger), 
+        m_messenger(messenger), 
         m_commandIndex(commandIndex),
         m_appendageIndex(appendageIndex)
     {
