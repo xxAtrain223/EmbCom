@@ -7,21 +7,6 @@
 [submodule "ext/json"]
 	path = ext/json
 	url = https://github.com/nlohmann/json.git
-[submodule "ext/cpp-linenoise"]
-	path = ext/cpp-linenoise
-	url = https://github.com/yhirose/cpp-linenoise.git
-[submodule "ext/sol2"]
-	path = ext/sol2
-	url = https://github.com/ThePhD/sol2.git
 [submodule "ext/EmbMessenger"]
 	path = ext/EmbMessenger
 	url = https://github.com/xxAtrain223/EmbMessenger.git
-[submodule "ext/args"]
-	path = ext/args
-	url = https://github.com/Taywee/args.git
-[submodule "ext/serial"]
-	path = ext/serial
-	url = https://github.com/xxAtrain223/serial.git
-[submodule "ext/sini"]
-	path = ext/sini
-	url = https://github.com/xxAtrain223/sini.git
