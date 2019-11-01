@@ -4,7 +4,12 @@
 #include <string>
 #include <memory>
 #include <map>
+
+#if __has_include(<filesystem>)
 #include <filesystem>
+#elif __has_include(<experimental/filesystem>)
+#include <experimental/filesystem>
+#endif
 
 #include <EmbMessenger/IBuffer.hpp>
 #include <EmbMessenger/EmbMessenger.hpp>
@@ -20,7 +25,12 @@ namespace emb::com
         std::map<std::string, Appendage> m_appendages;
 
     public:
+#if __has_include(<filesystem>)
         Device(std::filesystem::path configFolder);
+#elif __has_include(<experimental/filesystem>)
+        Device(std::experimental::filesystem::path configFolder);
+#endif
+        
 
         const Appendage& operator[](std::string appendageName) const;
 
