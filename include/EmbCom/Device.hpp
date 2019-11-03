@@ -20,15 +20,14 @@ namespace emb::com
 {
     class Device
     {
-        std::unique_ptr<shared::IBuffer> m_buffer;
         std::shared_ptr<host::EmbMessenger> m_messenger;
         std::map<std::string, Appendage> m_appendages;
 
     public:
 #if __has_include(<filesystem>)
-        Device(std::filesystem::path configFolder);
+        Device(std::filesystem::path configFolder, std::shared_ptr<shared::IBuffer> buffer);
 #elif __has_include(<experimental/filesystem>)
-        Device(std::experimental::filesystem::path configFolder);
+        Device(std::experimental::filesystem::path configFolder, std::shared_ptr<shared::IBuffer> buffer);
 #endif
         
 

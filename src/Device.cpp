@@ -19,7 +19,7 @@ namespace fs = std::experimental::filesystem;
 
 namespace emb::com
 {
-    Device::Device(fs::path configFolder)
+    Device::Device(fs::path configFolder, std::shared_ptr<shared::IBuffer> buffer)
     {
         if (!fs::is_directory(configFolder))
         {
@@ -41,7 +41,7 @@ namespace emb::com
         std::ifstream coreConfigStream(coreConfigFilePath.string());
         nlohmann::json coreConfig = nlohmann::json::parse(coreConfigStream);
 
-        m_messenger = std::make_shared<emb::host::EmbMessenger>(m_buffer.get(), [](std::exception_ptr) { return false; });
+        m_messenger = std::make_shared<emb::host::EmbMessenger>(buffer, [](std::exception_ptr) { return false; });
 
         for (auto& appendageType : coreConfig["appendages"].items())
         {
