@@ -20,29 +20,22 @@ namespace emb::com
         }
     }
 
-    std::shared_ptr<Command> CommandBuilder::makeCommand(const std::vector<Data::Value>& parameterValues) const
+    std::shared_ptr<Command> CommandBuilder::execute(const std::vector<Data>& parameters) const
     {
-        if (m_parameterTypes.size() != parameterValues.size())
+        if (m_parameterTypes.size() != parameters.size())
         {
             throw ParameterException("Value count is not the same as the Type count");
         }
 
-        std::vector<Data> data;
-
-        for (size_t i = 0; i < m_parameterTypes.size(); ++i)
-        {
-            data.emplace_back(m_parameterTypes[i], parameterValues[i]);
-        }
-
-        return std::make_shared<Command>(m_appendageIndex, data, m_returnValueTypes);
-    }
-
-    std::shared_ptr<Command> CommandBuilder::operator()(const std::vector<Data::Value>& parameters) const
-    {
-        std::shared_ptr<Command> command = makeCommand(parameters);
+        std::shared_ptr<Command> command = std::make_shared<Command>(m_appendageIndex, parameters, m_returnValueTypes);
 
         m_messenger->send(command, m_commandIndex)->wait();
 
         return command;
+    }
+
+    std::vector<Data::Type> CommandBuilder::getParametersTypes() const
+    {
+        return m_parameterTypes;
     }
 }

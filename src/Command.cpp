@@ -124,12 +124,12 @@ namespace emb::com
         }
     }
 
-    Data Command::getReturnValue(std::string rvName)
+    const Data& Command::getReturnValue(std::string rvName) const
     {
         return *m_returnValuesMap.at(rvName);
     }
 
-    Data Command::operator[](std::string rvName)
+    const Data& Command::operator[](std::string rvName) const
     {
         return getReturnValue(rvName);
     }

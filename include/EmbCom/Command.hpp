@@ -25,9 +25,9 @@ namespace emb::com
 
         void receive(host::EmbMessenger* messenger) override;
 
-        Data getReturnValue(std::string rvName);
+        const Data& getReturnValue(std::string rvName) const;
 
-        Data operator[](std::string rvName);
+        const Data& operator[](std::string rvName) const;
     };
 }
 

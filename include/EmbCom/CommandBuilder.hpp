@@ -41,7 +41,7 @@ namespace emb::com
             return std::make_shared<Command>(m_appendageIndex, parameterVector, m_returnValueTypes);
         }
 
-        std::shared_ptr<Command> makeCommand(const std::vector<Data::Value>& parameters) const;
+        std::shared_ptr<Command> execute(const std::vector<Data>& parameters) const;
 
         template <typename ...Ts>
         std::shared_ptr<Command> operator()(Ts&&... parameters) const
@@ -53,8 +53,8 @@ namespace emb::com
             return command;
         }
 
-        std::shared_ptr<Command> operator()(const std::vector<Data::Value>& parameters) const;
-        
+        std::vector<Data::Type> getParametersTypes() const;
+
     private:
         template <typename ...Ts, std::size_t ...Is>
         std::vector<Data> pushParameters(std::index_sequence<Is...>, Ts&& ... values) const
