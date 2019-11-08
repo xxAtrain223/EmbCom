@@ -41,7 +41,24 @@ namespace emb::com
         std::ifstream coreConfigStream(coreConfigFilePath.string());
         nlohmann::json coreConfig = nlohmann::json::parse(coreConfigStream);
 
-        m_messenger = std::make_shared<emb::host::EmbMessenger>(buffer, [](std::exception_ptr) { return false; });
+        m_messenger = std::make_shared<emb::host::EmbMessenger>(buffer, [=](std::exception_ptr eptr) {
+            try
+            {
+                std::rethrow_exception(eptr);
+            }
+            catch (emb::host::BaseException e)
+            {
+                std::shared_ptr<emb::com::Command> command = std::static_pointer_cast<emb::com::Command>(e.getCommand());
+
+                if (command != nullptr)
+                {
+                    command->m_exceptionPtr = eptr;
+                }
+            }
+            catch (...) {}
+
+            return false;
+        });
 
         for (auto& appendageType : coreConfig["appendages"].items())
         {

@@ -133,4 +133,9 @@ namespace emb::com
     {
         return getReturnValue(rvName);
     }
+
+    const std::exception_ptr& Command::getException() const
+    {
+        return m_exceptionPtr;
+    }
 }

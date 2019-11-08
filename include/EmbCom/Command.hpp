@@ -18,6 +18,9 @@ namespace emb::com
         std::vector<std::shared_ptr<Data>> m_returnValuesVec;
         std::map<std::string, std::shared_ptr<Data>> m_returnValuesMap;
 
+        friend class Device;
+        std::exception_ptr m_exceptionPtr;
+
     public:
         Command(uint16_t appendageIndex, std::vector<Data> parameters, std::vector<std::tuple<std::string, Data::Type>> returnValues);
 
@@ -28,6 +31,8 @@ namespace emb::com
         const Data& getReturnValue(std::string rvName) const;
 
         const Data& operator[](std::string rvName) const;
+
+        const std::exception_ptr& getException() const;
     };
 }
 
