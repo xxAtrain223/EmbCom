@@ -23,6 +23,8 @@ namespace emb::com
         std::shared_ptr<host::EmbMessenger> m_messenger;
         std::map<std::string, Appendage> m_appendages;
 
+        uint16_t m_stopId;
+
     public:
 #if __has_include(<filesystem>)
         Device(std::filesystem::path configFolder, std::shared_ptr<shared::IBuffer> buffer);
@@ -30,10 +32,11 @@ namespace emb::com
         Device(std::experimental::filesystem::path configFolder, std::shared_ptr<shared::IBuffer> buffer);
 #endif
         
-
         const Appendage& operator[](std::string appendageName) const;
 
-        //void allStop(); // Call allStop command
+        void stop();
+
+        const std::map<std::string, Appendage> getAppendages() const;
     };
 }
 

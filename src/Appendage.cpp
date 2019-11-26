@@ -21,4 +21,19 @@ namespace emb::com
     {
         return m_commands.at(commandName);
     }
+
+    void Appendage::stop()
+    {
+        try
+        {
+            m_commands.at("stop")();
+        }
+        catch (std::out_of_range)
+        { }
+    }
+
+    const std::map<std::string, CommandBuilder> Appendage::getCommands() const
+    {
+        return m_commands;
+    }
 }

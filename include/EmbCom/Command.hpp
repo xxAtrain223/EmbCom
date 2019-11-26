@@ -22,13 +22,15 @@ namespace emb::com
         std::exception_ptr m_exceptionPtr;
 
     public:
-        Command(uint16_t appendageIndex, std::vector<Data> parameters, std::vector<std::tuple<std::string, Data::Type>> returnValues);
+        Command(const uint16_t& appendageIndex, const std::vector<Data>& parameters, const std::vector<std::tuple<std::string, Data::Type>>& returnValues);
 
         void send(host::EmbMessenger* messenger) override;
 
         void receive(host::EmbMessenger* messenger) override;
 
         const Data& getReturnValue(std::string rvName) const;
+
+        const std::map<std::string, std::shared_ptr<Data>> getReturnValues() const;
 
         const Data& operator[](std::string rvName) const;
 

@@ -4,6 +4,7 @@
 #include <memory>
 #include <map>
 #include <cstdint>
+#include <tuple>
 
 #include <EmbMessenger/IBuffer.hpp>
 #include <EmbMessenger/EmbMessenger.hpp>
@@ -22,7 +23,7 @@ namespace emb::com
         uint16_t m_commandIndex;
         std::shared_ptr<host::EmbMessenger> m_messenger;
 
-        std::vector<Data::Type> m_parameterTypes;
+        std::vector<std::tuple<Data::Type, std::string>> m_parameters;
         std::vector<std::tuple<std::string, Data::Type>> m_returnValueTypes;
 
     public:
@@ -55,6 +56,8 @@ namespace emb::com
 
         std::vector<Data::Type> getParametersTypes() const;
 
+        std::vector<std::tuple<std::string, std::string>> getParameters() const;
+
     private:
         template <typename ...Ts, std::size_t ...Is>
         std::vector<Data> pushParameters(std::index_sequence<Is...>, Ts&& ... values) const
@@ -64,7 +67,7 @@ namespace emb::com
 
             // Fold Expression: https://en.cppreference.com/w/cpp/language/fold
             // Comma Operator:  https://en.cppreference.com/w/cpp/language/operator_other
-            (data.emplace_back(m_parameterTypes[Is], std::forward<Ts>(values)), ...);
+            (data.emplace_back(std::get<0>(m_parameters[Is]), std::forward<Ts>(values)), ...);
 
             return data;
         }
@@ -72,7 +75,7 @@ namespace emb::com
         template <typename ...Ts>
         std::vector<Data> makeParameters(Ts&& ... parameterValues) const
         {
-            if (sizeof...(parameterValues) != m_parameterTypes.size())
+            if (sizeof...(parameterValues) != m_parameters.size())
             {
                 throw ParameterException("Value count is not the same as the Type count");
             }

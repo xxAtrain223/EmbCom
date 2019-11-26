@@ -89,11 +89,25 @@ namespace emb::com
                     appendageCommandIds
                 ));
             }
+
+            m_stopId = coreConfig["commands"]["all_stop"];
         }
     }
 
     const Appendage& Device::operator[](std::string appendageName) const
     {
         return m_appendages.at(appendageName);
+    }
+
+    void Device::stop()
+    {
+        std::shared_ptr<Command> stopCommand = std::make_shared<Command>(m_stopId, std::vector<Data>{}, std::vector<std::tuple<std::string, Data::Type>>{});
+
+        m_messenger->send(stopCommand, m_stopId)->wait();
+    }
+
+    const std::map<std::string, Appendage> Device::getAppendages() const
+    {
+        return m_appendages;
     }
 }

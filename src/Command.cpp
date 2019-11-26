@@ -2,7 +2,7 @@
 
 namespace emb::com
 {
-    Command::Command(uint16_t appendageIndex, std::vector<Data> parameters, std::vector<std::tuple<std::string, Data::Type>> returnValues) :
+    Command::Command(const uint16_t& appendageIndex, const std::vector<Data>& parameters, const std::vector<std::tuple<std::string, Data::Type>>& returnValues) :
         m_appendageIndex(appendageIndex), m_parameters(parameters)
     {
         for (std::tuple<std::string, Data::Type> rv : returnValues)
@@ -127,6 +127,11 @@ namespace emb::com
     const Data& Command::getReturnValue(std::string rvName) const
     {
         return *m_returnValuesMap.at(rvName);
+    }
+
+    const std::map<std::string, std::shared_ptr<Data>> Command::getReturnValues() const
+    {
+        return m_returnValuesMap;
     }
 
     const Data& Command::operator[](std::string rvName) const

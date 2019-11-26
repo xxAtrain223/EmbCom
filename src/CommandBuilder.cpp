@@ -12,7 +12,7 @@ namespace emb::com
     {
         for (gen::parser::Parameter& parameter : genCommand->getParameters())
         {
-            m_parameterTypes.emplace_back(Data::StringToType(parameter.getType()));
+            m_parameters.emplace_back(Data::StringToType(parameter.getType()), parameter.getName());
         }
         for (gen::parser::ReturnValue& returnValue : genCommand->getReturnValues())
         {
@@ -22,7 +22,7 @@ namespace emb::com
 
     std::shared_ptr<Command> CommandBuilder::execute(const std::vector<Data>& parameters) const
     {
-        if (m_parameterTypes.size() != parameters.size())
+        if (m_parameters.size() != parameters.size())
         {
             throw ParameterException("Value count is not the same as the Type count");
         }
@@ -36,6 +36,25 @@ namespace emb::com
 
     std::vector<Data::Type> CommandBuilder::getParametersTypes() const
     {
-        return m_parameterTypes;
+        std::vector<Data::Type> parameterTypes;
+
+        for (const std::tuple<Data::Type, std::string>& parameter : m_parameters)
+        {
+            parameterTypes.emplace_back(std::get<0>(parameter));
+        }
+
+        return parameterTypes;
+    }
+
+    std::vector<std::tuple<std::string, std::string>> CommandBuilder::getParameters() const
+    {
+        std::vector<std::tuple<std::string, std::string>> parameters;
+
+        for (const std::tuple<Data::Type, std::string>& parameter : m_parameters)
+        {
+            parameters.emplace_back(Data::TypeToString(std::get<0>(parameter)), std::get<1>(parameter));
+        }
+
+        return parameters;
     }
 }

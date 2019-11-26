@@ -168,6 +168,9 @@ namespace emb::com
         Type getType() const;
         Value getValue() const;
 
+        std::string TypeToString() const;
+        static std::string TypeToString(Type type);
+
     protected:
         Type m_type;
         Value m_value;
@@ -193,8 +196,6 @@ namespace emb::com
         int16_t getInt16() const;
         int32_t getInt32() const;
         int64_t getInt64() const;
-
-        std::string TypeToString() const;
     };
 }
 
