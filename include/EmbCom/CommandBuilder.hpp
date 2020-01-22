@@ -58,6 +58,8 @@ namespace emb::com
 
         std::vector<std::tuple<std::string, std::string>> getParameters() const;
 
+        std::vector<std::tuple<std::string, std::string>> getReturnValues() const;
+
     private:
         template <typename ...Ts, std::size_t ...Is>
         std::vector<Data> pushParameters(std::index_sequence<Is...>, Ts&& ... values) const

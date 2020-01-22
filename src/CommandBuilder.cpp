@@ -57,4 +57,16 @@ namespace emb::com
 
         return parameters;
     }
+
+    std::vector<std::tuple<std::string, std::string>> CommandBuilder::getReturnValues() const
+    {
+        std::vector<std::tuple<std::string, std::string>> returnValues;
+
+        for (const std::tuple<std::string, Data::Type>& parameter : m_returnValueTypes)
+        {
+            returnValues.emplace_back(Data::TypeToString(std::get<1>(parameter)), std::get<0>(parameter));
+        }
+
+        return returnValues;
+    }
 }
