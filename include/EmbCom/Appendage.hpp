@@ -28,8 +28,6 @@ namespace emb::com
 
         const CommandBuilder& operator[](std::string commandName) const;
 
-        void stop();
-
         const std::map<std::string, CommandBuilder> getCommands() const;
     };
 }

@@ -101,9 +101,9 @@ namespace emb::com
 
     void Device::stop()
     {
-        std::shared_ptr<Command> stopCommand = std::make_shared<Command>(m_stopId, std::vector<Data>{}, std::vector<std::tuple<std::string, Data::Type>>{});
+        class StopCommand : public host::Command {};
 
-        m_messenger->send(stopCommand, m_stopId)->wait();
+        m_messenger->send(std::make_shared<StopCommand>(), m_stopId)->wait();
     }
 
     const std::map<std::string, Appendage> Device::getAppendages() const
